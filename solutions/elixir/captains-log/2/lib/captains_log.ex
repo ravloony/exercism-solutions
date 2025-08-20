@@ -1,0 +1,22 @@
+defmodule CaptainsLog do
+  @planetary_classes ["D", "H", "J", "K", "L", "M", "N", "R", "T", "Y"]
+
+  def random_planet_class() do
+    @planetary_classes |> Enum.random()
+  end
+
+  def random_ship_registry_number() do
+    "NCC-" <> to_string(Enum.random(1000..9999))
+  end
+
+  def random_stardate() do
+    :rand.uniform() * 1000 + 41000
+  end
+
+  @spec format_stardate(float) :: string
+  def format_stardate(stardate) when is_float(stardate) do
+    :io_lib.format("~.1f", [stardate])
+      |> to_string()
+  end
+  def format_stardate(stardate), do: raise ArgumentError
+end
